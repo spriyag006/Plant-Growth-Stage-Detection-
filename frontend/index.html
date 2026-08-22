@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plant Growth Stage Detection</title>
+
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8f5e9,
+            #c8e6c9,
+            #f1f8e9
+        );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 650px;
+}
+
+
+/* Header */
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.icon {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    font-size: 32px;
+    color: #1b5e20;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #55745b;
+    font-size: 16px;
+}
+
+
+/* Main Card */
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Upload */
+
+.upload-area {
+    border: 2px dashed #66bb6a;
+
+    border-radius: 15px;
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    background: #f8fff8;
+
+    transition: 0.3s;
+}
+
+.upload-area:hover {
+    background: #f1f8f1;
+
+    border-color: #2e7d32;
+}
+
+.upload-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.upload-area h2 {
+    color: #2e7d32;
+
+    margin-bottom: 8px;
+}
+
+.upload-area p {
+    color: #6b806f;
+
+    margin-bottom: 15px;
+}
+
+
+/* Choose Image Button */
+
+.upload-btn {
+    display: inline-block;
+
+    padding: 12px 25px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.upload-btn:hover {
+    background: #1b5e20;
+
+    transform: translateY(-2px);
+}
+
+
+.file-name {
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    color: #777;
+}
+
+
+/* Preview */
+
+.preview-container {
+    display: none;
+
+    margin-top: 25px;
+
+    text-align: center;
+}
+
+.preview-container h3 {
+    color: #2e7d32;
+
+    margin-bottom: 15px;
+}
+
+.preview-container img {
+    width: 100%;
+
+    max-width: 350px;
+
+    max-height: 300px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    border: 1px solid #ddd;
+
+    padding: 5px;
+
+    background: white;
+}
+
+
+/* Detect Button */
+
+.detect-btn {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #43a047;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.detect-btn:hover:not(:disabled) {
+    background: #2e7d32;
+
+    transform: translateY(-2px);
+}
+
+.detect-btn:disabled {
+    background: #bdbdbd;
+
+    cursor: not-allowed;
+}
+
+
+/* Loading */
+
+.loading {
+    display: none;
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #2e7d32;
+}
+
+.spinner {
+    width: 35px;
+
+    height: 35px;
+
+    border: 4px solid #c8e6c9;
+
+    border-top: 4px solid #2e7d32;
+
+    border-radius: 50%;
+
+    margin: auto;
+
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* Result */
+
+.result {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    background: #f1f8e9;
+
+    border: 1px solid #a5d6a7;
+}
+
+.result-title {
+    text-align: center;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #1b5e20;
+
+    margin-bottom: 20px;
+}
+
+
+/* Stage */
+
+.stage {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.stage span {
+    display: block;
+
+    color: #666;
+
+    margin-bottom: 8px;
+}
+
+.stage strong {
+    display: block;
+
+    font-size: 28px;
+
+    color: #2e7d32;
+}
+
+
+/* Confidence */
+
+.confidence-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    color: #555;
+}
+
+.confidence-header strong {
+    color: #2e7d32;
+}
+
+
+/* Progress */
+
+.progress {
+    width: 100%;
+
+    height: 12px;
+
+    background: #dcedc8;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+
+    height: 100%;
+
+    background: #43a047;
+
+    border-radius: 10px;
+
+    transition: width 1s ease;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #55745b;
+
+    font-size: 14px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .upload-area {
+        padding: 25px 15px;
+    }
+
+}
+  </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <div class="icon">🌱</div>
+            <h1>Plant Growth Stage Detection</h1>
+            <p>AI-powered plant growth stage analysis</p>
+        </div>
+
+
+        <div class="card">
+
+            <!-- Upload Area -->
+            <div class="upload-area" id="uploadArea">
+
+                <div class="upload-icon">📷</div>
+
+                <h2>Upload Plant Image</h2>
+
+                <p>
+                    Upload a clear photo of the plant
+                </p>
+
+                <label for="plantImage" class="upload-btn">
+                    Choose Image
+                </label>
+
+                <input
+                    type="file"
+                    id="plantImage"
+                    accept="image/*"
+                    hidden
+                >
+
+                <p class="file-name" id="fileName">
+                    No image selected
+                </p>
+
+            </div>
+
+
+            <!-- Image Preview -->
+            <div class="preview-container" id="previewContainer">
+
+                <h3>Image Preview</h3>
+
+                <img
+                    id="imagePreview"
+                    src=""
+                    alt="Plant Preview"
+                >
+
+            </div>
+
+
+            <!-- Detect Button -->
+            <button
+                class="detect-btn"
+                id="detectBtn"
+                disabled
+            >
+                🔍 Detect Growth Stage
+            </button>
+
+
+            <!-- Loading -->
+            <div
+                class="loading"
+                id="loading"
+            >
+                <div class="spinner"></div>
+
+                <p>
+                    AI is analyzing the plant...
+                </p>
+            </div>
+
+
+            <!-- Result -->
+            <div
+                class="result"
+                id="result"
+            >
+
+                <div class="result-title">
+                    🤖 AI Prediction
+                </div>
+
+                <div class="stage">
+                    <span>Growth Stage</span>
+
+                    <strong id="stageResult">
+                        --
+                    </strong>
+                </div>
+
+                <div class="confidence">
+
+                    <div class="confidence-header">
+                        <span>Confidence</span>
+
+                        <strong id="confidenceText">
+                            0%
+                        </strong>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            id="progressBar"
+                        ></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <footer>
+            <p>
+                🌿 Powered by Deep Learning & CNN
+            </p>
+        </footer>
+
+    </div>
+
+
+    <script>
+        const plantImage = document.getElementById("plantImage");
+
+const uploadArea = document.getElementById("uploadArea");
+
+const imagePreview = document.getElementById("imagePreview");
+
+const previewContainer =
+    document.getElementById("previewContainer");
+
+const fileName =
+    document.getElementById("fileName");
+
+const detectBtn =
+    document.getElementById("detectBtn");
+
+const loading =
+    document.getElementById("loading");
+
+const result =
+    document.getElementById("result");
+
+const stageResult =
+    document.getElementById("stageResult");
+
+const confidenceText =
+    document.getElementById("confidenceText");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+
+// ----------------------------------
+// Image Selection
+// ----------------------------------
+
+plantImage.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) {
+        return;
+    }
+
+
+    // Check image type
+
+    if (!file.type.startsWith("image/")) {
+
+        alert("Please select a valid image.");
+
+        plantImage.value = "";
+
+        return;
+    }
+
+
+    // Display file name
+
+    fileName.textContent = file.name;
+
+
+    // Create image preview
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+
+        imagePreview.src = event.target.result;
+
+        previewContainer.style.display = "block";
+
+        detectBtn.disabled = false;
+
+    };
+
+    reader.readAsDataURL(file);
+
+
+    // Hide previous result
+
+    result.style.display = "none";
+
+});
+
+
+// ----------------------------------
+// Detect Growth Stage
+// ----------------------------------
+
+detectBtn.addEventListener("click", async function () {
+
+    const file = plantImage.files[0];
+
+
+    if (!file) {
+
+        alert("Please upload a plant image first.");
+
+        return;
+    }
+
+
+    // Show loading
+
+    loading.style.display = "block";
+
+    result.style.display = "none";
+
+    detectBtn.disabled = true;
+
+
+    // Create form data
+
+    const formData = new FormData();
+
+    formData.append("image", file);
+
+
+    try {
+
+        /*
+         * Flask API
+         *
+         * We will create this endpoint
+         * in the backend:
+         *
+         * POST /predict
+         */
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/predict",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error || "Server error: " + response.status
+            );
+
+        }
+
+
+        // Display prediction
+
+        displayResult(
+            data.stage,
+            data.confidence
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Prediction failed: " + error.message);
+
+    }
+
+
+    // Hide loading
+
+    loading.style.display = "none";
+
+    detectBtn.disabled = false;
+
+});
+
+
+// ----------------------------------
+// Display Result
+// ----------------------------------
+
+function displayResult(stage, confidence) {
+
+    result.style.display = "block";
+
+
+    // Stage
+
+    stageResult.textContent = stage;
+
+
+    // Confidence
+
+    const confidenceValue =
+        Number(confidence).toFixed(2);
+
+    confidenceText.textContent =
+        confidenceValue + "%";
+
+
+    // Progress bar
+
+    progressBar.style.width =
+        confidenceValue + "%";
+
+}
+    </script>
+
+</body>
+</html>

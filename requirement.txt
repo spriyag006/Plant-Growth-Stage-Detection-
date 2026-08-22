@@ -1,0 +1,10 @@
+tensorflow
+flask
+flask-cors
+pillow
+numpy
+scikit-learn
+matplotlib
+seaborn
+pymongo
+python-dotenv
