@@ -25,9 +25,6 @@ app = Flask(__name__)
 CORS(app)
 
 
-# ---------------------------------------
-# Paths
-# ---------------------------------------
 
 MODEL_PATH = os.path.join(
     "model",
@@ -40,18 +37,9 @@ CLASS_PATH = os.path.join(
 )
 
 
-# ---------------------------------------
-# Load AI Model
-# ---------------------------------------
-
 model = tf.keras.models.load_model(
     MODEL_PATH
 )
-
-
-# ---------------------------------------
-# Load Class Names
-# ---------------------------------------
 
 with open(
     CLASS_PATH,
@@ -69,11 +57,6 @@ print(
     "Classes:",
     class_names
 )
-
-
-# ---------------------------------------
-# Prediction API
-# ---------------------------------------
 
 @app.route(
     "/predict",
@@ -107,7 +90,7 @@ def predict():
         )
 
 
-        # AI Prediction
+       
 
         predictions = model.predict(
             image,
@@ -132,7 +115,7 @@ def predict():
         )
 
 
-        # Keep inference available even when the optional database is offline.
+      
         try:
             save_prediction(
                 file.filename,
@@ -166,11 +149,6 @@ def predict():
 
         }), 500
 
-
-# ---------------------------------------
-# Home
-# ---------------------------------------
-
 @app.route("/")
 def home():
 
@@ -180,13 +158,11 @@ def home():
     )
 
 
-# ---------------------------------------
-# Run Flask
-# ---------------------------------------
-
 if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT",5000))
 
     app.run(
-        debug=True,
-        port=5000
+        host="0.0.0.0",
+        port=port
     )
