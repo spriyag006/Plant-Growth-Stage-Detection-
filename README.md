@@ -52,9 +52,10 @@ MobileNetV2 is a lightweight Convolutional Neural Network (CNN) architecture des
 Instead of training a CNN completely from scratch, the project uses a pretrained MobileNetV2 network for feature extraction and adds custom classification layers.
 
 ---
-### Model Architecture
 
-'''text
+## Model Architecture
+
+
 Plant Image
      │
      ▼
@@ -85,15 +86,17 @@ Softmax Classifier
 Plant Growth Stage
 
 ---
-### ▶️ Run the Backend
+
+## ▶️ Run the Backend
 
 cd backend
 python app.py
 http://127.0.0.1:5000
+
 ---
 
+## ☁️ Deployment
 
-###☁️ Deployment
 Root Directory: backend
 Build Command:pip install -r ../requirements.txt
 Start Command:gunicorn app:app
@@ -102,13 +105,13 @@ TensorFlow Version:2.21.0
 
 ---
 
-###📄 License
+## 📄 License
 
 This project is developed as a Deep Learning mini project for educational purposes.
 ---
 
 
-###👩‍💻 Author
+## 👩‍💻 Author
 
 Sangeetha Priya
 
