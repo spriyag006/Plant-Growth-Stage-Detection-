@@ -82,6 +82,9 @@ Softmax Classifier
      │
      ▼
 Plant Growth Stage
+
+---
+
 🚀 Project Structure
 Plant-Growth-Stage-Detection/
 │
@@ -108,40 +111,4 @@ Plant-Growth-Stage-Detection/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-▶️ Run the Backend Locally
-cd backend
-python app.py
-
-The backend will run at:
-
-http://127.0.0.1:5000
-☁️ Deployment
-
-Root Directory:
-
-backend
-
-Build Command:
-
-pip install -r ../requirements.txt
-
-Start Command:
-
-gunicorn app:app
-
-Python Version:
-
-3.12.10
-
-TensorFlow Version:
-
-2.21.0
-📄 License
-
-This project is developed as a Deep Learning mini project for educational purposes.
-
-👩‍💻 Author
-
-Sangeetha Priya
-
-Artificial Intelligence and Data Science
+---
