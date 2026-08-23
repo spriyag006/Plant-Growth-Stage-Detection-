@@ -1,13 +1,20 @@
-🌱 Plant Growth Stage Detection
+# 🌱 Plant Growth Stage Detection
 
 A Deep Learning-based web application that detects the **growth stage of a plant from an uploaded plant image**.
 
 The project uses **MobileNetV2 Transfer Learning** to classify plant images into five different growth stages. A **Flask backend** handles image preprocessing and prediction, while a simple **HTML, CSS, and JavaScript frontend** allows users to upload a plant image and receive the predicted growth stage.
 
-cloning  : https://plant-growth-stage-detection.onrender.com
-github   : 
+## 🔗 Project Links
 
- 📌Project Overview
+**Cloning / Live Application:**  
+https://plant-growth-stage-detection.onrender.com
+
+**GitHub Repository:**  
+https://github.com/spriyag006/Plant-Growth-Stage-Detection-/tree/main
+
+---
+
+# 📌 Project Overview
 
 Plant growth monitoring is important in agriculture because different growth stages require different care, nutrients, and environmental conditions.
 
@@ -21,7 +28,9 @@ The user simply:
 4. The trained AI model analyzes the image.
 5. The predicted growth stage and confidence score are displayed.
 
-🎯 Objectives
+---
+
+# 🎯 Objectives
 
 - Detect plant growth stages automatically.
 - Build an AI-based image classification system.
@@ -32,7 +41,9 @@ The user simply:
 - Store prediction information using MongoDB Atlas.
 - Deploy the backend using Render.
 
-- 🧠 AI Model
+---
+
+# 🧠 AI Model
 
 The project uses **MobileNetV2 with Transfer Learning**.
 
@@ -40,42 +51,38 @@ MobileNetV2 is a lightweight Convolutional Neural Network (CNN) architecture des
 
 Instead of training a CNN completely from scratch, the project uses a pretrained MobileNetV2 network for feature extraction and adds custom classification layers.
 
-Model Architecture
+## Model Architecture
 
-
-                 Plant Image
-                     │
-                     ▼
-              Image Preprocessing
-                     │
-                     ▼
-               Resize 224×224
-                     │
-                     ▼
-                MobileNetV2
-                     │
-                     ▼
-             Feature Extraction
-                     │
-                     ▼
-          Global Average Pooling
-                     │
-                     ▼
-                Dense Layer
-                     │
-                     ▼
-                 Dropout
-                     │
-                     ▼
-             Softmax Classifier
-                     │
-                     ▼
-          Plant Growth Stage
-
-          Plant-Growth-Stage-Detection/
-
-🚀Project Structure
-
+```text
+             Plant Image
+                 │
+                 ▼
+          Image Preprocessing
+                 │
+                 ▼
+           Resize 224×224
+                 │
+                 ▼
+            MobileNetV2
+                 │
+                 ▼
+         Feature Extraction
+                 │
+                 ▼
+      Global Average Pooling
+                 │
+                 ▼
+            Dense Layer
+                 │
+                 ▼
+             Dropout
+                 │
+                 ▼
+         Softmax Classifier
+                 │
+                 ▼
+      Plant Growth Stage
+🚀 Project Structure
 Plant-Growth-Stage-Detection/
 │
 ├── backend/
@@ -101,24 +108,38 @@ Plant-Growth-Stage-Detection/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
 ▶️ Run the Backend Locally
-
 cd backend
 python app.py
+
+The backend will run at:
+
 http://127.0.0.1:5000
 
 ☁️ Deployment
 
-Root Directory     : backend
-Build Command      : pip install -r ../requirements.txt
-Start Command      : gunicorn app:app
-Python Version     : 3.12.10
-TensorFlow Version : 2.21.0
+Root Directory:
 
+backend
+
+Build Command:
+
+pip install -r ../requirements.txt
+
+Start Command:
+
+gunicorn app:app
+
+Python Version:
+
+3.12.10
+
+TensorFlow Version:
+
+2.21.0
 📄 License
 
-This project is developed as a Deep Learning mini project for educational purposes.   
+This project is developed as a Deep Learning mini project for educational purposes.
 
 👩‍💻 Author
 
