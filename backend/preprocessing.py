@@ -20,7 +20,7 @@ def preprocess_image(image):
         image,
         dtype=np.float32
     )
-      image = preprocess_input(image)
+    image = preprocess_input(image)
 
 
     image = np.expand_dims(
