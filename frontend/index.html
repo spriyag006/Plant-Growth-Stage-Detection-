@@ -40,7 +40,6 @@ body {
 }
 
 
-/* Header */
 
 .header {
     text-align: center;
@@ -64,7 +63,6 @@ body {
 }
 
 
-/* Main Card */
 
 .card {
     background: rgba(255, 255, 255, 0.95);
@@ -78,7 +76,6 @@ body {
 }
 
 
-/* Upload */
 
 .upload-area {
     border: 2px dashed #66bb6a;
@@ -118,7 +115,6 @@ body {
 }
 
 
-/* Choose Image Button */
 
 .upload-btn {
     display: inline-block;
@@ -154,8 +150,6 @@ body {
 }
 
 
-/* Preview */
-
 .preview-container {
     display: none;
 
@@ -189,7 +183,6 @@ body {
 }
 
 
-/* Detect Button */
 
 .detect-btn {
     width: 100%;
@@ -228,7 +221,6 @@ body {
 }
 
 
-/* Loading */
 
 .loading {
     display: none;
@@ -269,7 +261,6 @@ body {
 }
 
 
-/* Result */
 
 .result {
     display: none;
@@ -298,8 +289,6 @@ body {
 }
 
 
-/* Stage */
-
 .stage {
     text-align: center;
 
@@ -323,8 +312,6 @@ body {
 }
 
 
-/* Confidence */
-
 .confidence-header {
     display: flex;
 
@@ -339,8 +326,6 @@ body {
     color: #2e7d32;
 }
 
-
-/* Progress */
 
 .progress {
     width: 100%;
@@ -367,7 +352,6 @@ body {
 }
 
 
-/* Footer */
 
 footer {
     text-align: center;
@@ -378,9 +362,6 @@ footer {
 
     font-size: 14px;
 }
-
-
-/* Mobile */
 
 @media (max-width: 600px) {
 
@@ -417,7 +398,7 @@ footer {
 
         <div class="card">
 
-            <!-- Upload Area -->
+          
             <div class="upload-area" id="uploadArea">
 
                 <div class="upload-icon">📷</div>
@@ -446,7 +427,7 @@ footer {
             </div>
 
 
-            <!-- Image Preview -->
+           
             <div class="preview-container" id="previewContainer">
 
                 <h3>Image Preview</h3>
@@ -460,7 +441,7 @@ footer {
             </div>
 
 
-            <!-- Detect Button -->
+       
             <button
                 class="detect-btn"
                 id="detectBtn"
@@ -470,7 +451,7 @@ footer {
             </button>
 
 
-            <!-- Loading -->
+
             <div
                 class="loading"
                 id="loading"
@@ -483,7 +464,7 @@ footer {
             </div>
 
 
-            <!-- Result -->
+       
             <div
                 class="result"
                 id="result"
@@ -566,9 +547,6 @@ const progressBar =
     document.getElementById("progressBar");
 
 
-// ----------------------------------
-// Image Selection
-// ----------------------------------
 
 plantImage.addEventListener("change", function () {
 
@@ -579,7 +557,7 @@ plantImage.addEventListener("change", function () {
     }
 
 
-    // Check image type
+  
 
     if (!file.type.startsWith("image/")) {
 
@@ -591,12 +569,10 @@ plantImage.addEventListener("change", function () {
     }
 
 
-    // Display file name
 
     fileName.textContent = file.name;
 
 
-    // Create image preview
 
     const reader = new FileReader();
 
@@ -613,16 +589,13 @@ plantImage.addEventListener("change", function () {
     reader.readAsDataURL(file);
 
 
-    // Hide previous result
+
 
     result.style.display = "none";
 
 });
 
 
-// ----------------------------------
-// Detect Growth Stage
-// ----------------------------------
 
 detectBtn.addEventListener("click", async function () {
 
@@ -637,7 +610,7 @@ detectBtn.addEventListener("click", async function () {
     }
 
 
-    // Show loading
+   
 
     loading.style.display = "block";
 
@@ -646,7 +619,7 @@ detectBtn.addEventListener("click", async function () {
     detectBtn.disabled = true;
 
 
-    // Create form data
+   
 
     const formData = new FormData();
 
@@ -655,22 +628,13 @@ detectBtn.addEventListener("click", async function () {
 
     try {
 
-        /*
-         * Flask API
-         *
-         * We will create this endpoint
-         * in the backend:
-         *
-         * POST /predict
-         */
-
-        const response = await fetch(
-            "http://127.0.0.1:5000/predict",
-            {
-                method: "POST",
-                body: formData
-            }
-        );
+      const response = await fetch(
+    "/predict",
+    {
+        method: "POST",
+        body: formData
+    }
+);
 
 
         const data = await response.json();
@@ -684,8 +648,6 @@ detectBtn.addEventListener("click", async function () {
 
         }
 
-
-        // Display prediction
 
         displayResult(
             data.stage,
@@ -702,7 +664,6 @@ detectBtn.addEventListener("click", async function () {
     }
 
 
-    // Hide loading
 
     loading.style.display = "none";
 
@@ -711,21 +672,14 @@ detectBtn.addEventListener("click", async function () {
 });
 
 
-// ----------------------------------
-// Display Result
-// ----------------------------------
 
 function displayResult(stage, confidence) {
 
     result.style.display = "block";
 
 
-    // Stage
-
     stageResult.textContent = stage;
 
-
-    // Confidence
 
     const confidenceValue =
         Number(confidence).toFixed(2);
@@ -734,7 +688,6 @@ function displayResult(stage, confidence) {
         confidenceValue + "%";
 
 
-    // Progress bar
 
     progressBar.style.width =
         confidenceValue + "%";
