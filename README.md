@@ -115,6 +115,7 @@ This project is developed as a Deep Learning mini project for educational purpos
 ## 👩‍💻 Author
 
 Sangeetha Priya
+
 Artificial Intelligence and Data Science
 
 ---
