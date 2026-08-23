@@ -99,15 +99,15 @@ http://127.0.0.1:5000
 
 ## ☁️ Deployment
 
-Root Directory: backend
+Root Directory :  backend
 
-Build Command:pip install -r ../requirements.txt
+Build Command : pip install -r ../requirements.txt
 
-Start Command:gunicorn app:app
+Start Command : gunicorn app:app
 
-Python Version:3.12.10
+Python Version : 3.12.10
 
-TensorFlow Version:2.21.0
+TensorFlow Version : 2.21.0
 
 ---
 
