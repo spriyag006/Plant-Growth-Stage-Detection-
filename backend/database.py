@@ -14,7 +14,7 @@ if not MONGO_URI:
     )
 
 client = MongoClient(MONGO_URI)
-
+print(client.list_database_names())
 db = client["plant_growth_db"]
 
 predictions_collection = db["predictions"]

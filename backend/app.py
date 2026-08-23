@@ -94,10 +94,10 @@ def predict():
 
        
 
-        predictions = model.predict(
-            image,
-            verbose=0
-        )[0]
+       import time
+        start = time.time()
+        predictions = model.predict(image, verbose=0)[0]
+        print("Inference took:", time.time() - start, "seconds")
 
 
         predicted_index = int(
