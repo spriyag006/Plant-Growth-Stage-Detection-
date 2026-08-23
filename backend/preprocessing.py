@@ -1,9 +1,7 @@
 from PIL import Image
 
 import numpy as np
-
-import tensorflow as tf
-
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 IMAGE_SIZE = (224, 224)
 
@@ -22,6 +20,8 @@ def preprocess_image(image):
         image,
         dtype=np.float32
     )
+      image = preprocess_input(image)
+
 
     image = np.expand_dims(
         image,
