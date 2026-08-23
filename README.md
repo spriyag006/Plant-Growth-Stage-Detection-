@@ -89,8 +89,10 @@ Plant Growth Stage
 
 ## ▶️ Run the Backend
 
-cd backend ||
-python app.py  ||
+cd backend 
+
+python app.py  
+
 http://127.0.0.1:5000
 
 ---
@@ -98,9 +100,13 @@ http://127.0.0.1:5000
 ## ☁️ Deployment
 
 Root Directory: backend
+
 Build Command:pip install -r ../requirements.txt
+
 Start Command:gunicorn app:app
+
 Python Version:3.12.10
+
 TensorFlow Version:2.21.0
 
 ---
