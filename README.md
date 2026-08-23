@@ -51,9 +51,10 @@ MobileNetV2 is a lightweight Convolutional Neural Network (CNN) architecture des
 
 Instead of training a CNN completely from scratch, the project uses a pretrained MobileNetV2 network for feature extraction and adds custom classification layers.
 
+---
 ### Model Architecture
 
-```text
+
 Plant Image
      │
      ▼
