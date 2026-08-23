@@ -94,7 +94,7 @@ def predict():
 
        
 
-       import time
+        import time
         start = time.time()
         predictions = model.predict(image, verbose=0)[0]
         print("Inference took:", time.time() - start, "seconds")
