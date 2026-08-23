@@ -6,7 +6,7 @@ The project uses **MobileNetV2 Transfer Learning** to classify plant images into
 
 ## 🔗 Project Links
 
-**Cloning / Live Application:**  
+**Live Application:**  
 https://plant-growth-stage-detection.onrender.com
 
 **GitHub Repository:**  
@@ -14,7 +14,7 @@ https://github.com/spriyag006/Plant-Growth-Stage-Detection-/tree/main
 
 ---
 
-# 📌 Project Overview
+## 📌 Project Overview
 
 Plant growth monitoring is important in agriculture because different growth stages require different care, nutrients, and environmental conditions.
 
@@ -30,7 +30,7 @@ The user simply:
 
 ---
 
-# 🎯 Objectives
+## 🎯 Objectives
 
 - Detect plant growth stages automatically.
 - Build an AI-based image classification system.
@@ -43,7 +43,7 @@ The user simply:
 
 ---
 
-# 🧠 AI Model
+## 🧠 AI Model
 
 The project uses **MobileNetV2 with Transfer Learning**.
 
@@ -51,39 +51,38 @@ MobileNetV2 is a lightweight Convolutional Neural Network (CNN) architecture des
 
 Instead of training a CNN completely from scratch, the project uses a pretrained MobileNetV2 network for feature extraction and adds custom classification layers.
 
-## Model Architecture
+### Model Architecture
 
 ```text
-             Plant Image
-                 │
-                 ▼
-          Image Preprocessing
-                 │
-                 ▼
-           Resize 224×224
-                 │
-                 ▼
-            MobileNetV2
-                 │
-                 ▼
-         Feature Extraction
-                 │
-                 ▼
-      Global Average Pooling
-                 │
-                 ▼
-            Dense Layer
-                 │
-                 ▼
-             Dropout
-                 │
-                 ▼
-         Softmax Classifier
-                 │
-                 ▼
-      Plant Growth Stage
----
- ##  🚀 Project Structure
+Plant Image
+     │
+     ▼
+Image Preprocessing
+     │
+     ▼
+Resize 224×224
+     │
+     ▼
+MobileNetV2
+     │
+     ▼
+Feature Extraction
+     │
+     ▼
+Global Average Pooling
+     │
+     ▼
+Dense Layer
+     │
+     ▼
+Dropout
+     │
+     ▼
+Softmax Classifier
+     │
+     ▼
+Plant Growth Stage
+🚀 Project Structure
 Plant-Growth-Stage-Detection/
 │
 ├── backend/
@@ -109,35 +108,40 @@ Plant-Growth-Stage-Detection/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
----
-###▶️ Run the Backend Locally
+▶️ Run the Backend Locally
 cd backend
 python app.py
 
 The backend will run at:
 
 http://127.0.0.1:5000
-----
+☁️ Deployment
 
-###☁️ Deployment
+Root Directory:
 
-Root Directory: backend
+backend
 
-Build Command : pip install -r ../requirements.txt
+Build Command:
 
-Start Command : gunicorn app:app
+pip install -r ../requirements.txt
 
-Python Version : 3.12.10
+Start Command:
 
-TensorFlow Version : 2.21.0
----
-###📄 License
+gunicorn app:app
+
+Python Version:
+
+3.12.10
+
+TensorFlow Version:
+
+2.21.0
+📄 License
 
 This project is developed as a Deep Learning mini project for educational purposes.
----
-###👩‍💻 Author
+
+👩‍💻 Author
 
 Sangeetha Priya
 
 Artificial Intelligence and Data Science
----
